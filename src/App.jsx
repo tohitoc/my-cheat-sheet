@@ -3,7 +3,7 @@ import Login from './Login.jsx'
 import Records from './Records.jsx'
 
 function App() {
-  return <Records />
+  return <Sheets />
 }
 
 export default App
