@@ -1,9 +1,9 @@
 import Sheets from './Sheets.jsx'
 import Login from './Login.jsx'
-import Records from './Records.jsx'
+import TablePage from './TablePage.jsx'
 
 function App() {
-  return <Sheets />
+  return <TablePage />
 }
 
 export default App
