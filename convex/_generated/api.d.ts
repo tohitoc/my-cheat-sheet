@@ -8,8 +8,8 @@
  * @module
  */
 
+import type * as commands from "../commands.js";
 import type * as sheet from "../sheet.js";
-import type * as table from "../table.js";
 
 import type {
   ApiFromModules,
@@ -26,8 +26,8 @@ import type {
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  commands: typeof commands;
   sheet: typeof sheet;
-  table: typeof table;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
 

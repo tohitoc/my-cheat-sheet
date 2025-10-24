@@ -14,14 +14,14 @@ export default function Sheet({ children }) {
         {children}
       </span>
       <button type="button" className="relative hover:bg-sky-100 rounded-xl" onClick={handleClick}>
-        <EllipsisVertical size={24} />
+        <EllipsisVertical size={24} className="cursor-pointer" />
         {isOpen && (
           <div className="absolute">
-            <button type="button" className="w-[140px] h-[37px] bg-e8e8e8 hover:bg-gray-300 rounded-lg flex items-center justify-start px-2 gap-3">
+            <button type="button" className="cursor-pointer w-[140px] h-[37px] bg-e8e8e8 hover:bg-gray-300 rounded-lg flex items-center justify-start px-2 gap-3">
               <SquarePen size={20} />
               <span className="font-inter font-medium text-2xl">Rename</span>
             </button>
-            <button type="button" className="w-[140px] h-[37px] bg-e8e8e8 hover:bg-gray-300 rounded-lg flex items-center justify-start px-2 gap-3">
+            <button type="button" className="cursor-pointer w-[140px] h-[37px] bg-e8e8e8 hover:bg-gray-300 rounded-lg flex items-center justify-start px-2 gap-3">
               <Trash size={20} />
               <span className="font-inter font-medium text-2xl">Delete</span>
             </button>

@@ -5,11 +5,11 @@ import { useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../convex/_generated/api";
 
-export default function TablePage() {
+export default function Commands() {
   const [open, setOpen] = useState(false);
   const [command, setCommand] = useState("");
   const [description, setDescription] = useState("");
-  const addRow = useMutation(api.table.addRow);
+  const addRow = useMutation(api.commands.addRow);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,7 +23,7 @@ export default function TablePage() {
       <Header />
       <div className="flex justify-between items-center w-full max-w-4/5 mx-auto mb-15">
         <h1 className="font-inter font-black text-5xl">Windows</h1>
-        <button onClick={() => setOpen(true)} type="button" className="flex gap-3 px-2 py-1 rounded-lg justify-between items-center bg-e8e8e8 hover:bg-gray-300">
+        <button onClick={() => setOpen(true)} type="button" className="cursor-pointer flex gap-3 px-2 py-1 rounded-lg justify-between items-center bg-e8e8e8 hover:bg-gray-300">
           <Plus size={24} />
           <span className="font-inter text-2xl font-medium">Add Row</span>
         </button>
@@ -55,10 +55,10 @@ export default function TablePage() {
               onChange={(e) => setDescription(e.target.value)}
             />
             <div className="flex justify-between w-full">
-              <button onClick={() => setOpen(false)} type="button" className="hover:bg-gray-300 w-[162px] h-[44px] bg-e8e8e8 font-inter font-normal text-xl">
+              <button onClick={() => setOpen(false)} type="button" className="cursor-pointer hover:bg-gray-300 w-[162px] h-[44px] bg-e8e8e8 font-inter font-normal text-xl">
                 Cancel
               </button>
-              <button type="submit" className="hover:bg-gray-300 w-[162px] h-[44px] bg-e8e8e8 font-inter font-normal text-xl">
+              <button type="submit" className="cursor-pointer hover:bg-gray-300 w-[162px] h-[44px] bg-e8e8e8 font-inter font-normal text-xl">
                 OK
               </button>
             </div>

@@ -21,7 +21,7 @@ export default function Sheets() {
       <Header />
       <div className="flex justify-between items-center w-full max-w-4/5 mx-auto mb-15">
         <h1 className="font-inter font-black text-5xl">Sheets</h1>
-        <button onClick={() => setOpen(true)} type="button" className="flex gap-3 px-2 py-1 rounded-lg justify-between items-center bg-e8e8e8 hover:bg-gray-300">
+        <button onClick={() => setOpen(true)} type="button" className="cursor-pointer flex gap-3 px-2 py-1 rounded-lg justify-between items-center bg-e8e8e8 hover:bg-gray-300">
           <Plus size={24} />
           <span className="font-inter text-2xl font-medium">Add Sheet</span>
         </button>
@@ -37,10 +37,10 @@ export default function Sheets() {
               onChange={(e) => setName(e.target.value)}
             />
             <div className="flex justify-between w-full">
-              <button onClick={() => setOpen(false)} type="button" className="hover:bg-gray-300 w-[162px] h-[44px] bg-e8e8e8 font-inter font-normal text-xl">
+              <button onClick={() => setOpen(false)} type="button" className="cursor-pointer hover:bg-gray-300 w-[162px] h-[44px] bg-e8e8e8 font-inter font-normal text-xl">
                 Cancel
               </button>
-              <button type="submit" className="hover:bg-gray-300 w-[162px] h-[44px] bg-e8e8e8 font-inter font-normal text-xl">
+              <button type="submit" className="cursor-pointer hover:bg-gray-300 w-[162px] h-[44px] bg-e8e8e8 font-inter font-normal text-xl">
                 OK
               </button>
             </div>
