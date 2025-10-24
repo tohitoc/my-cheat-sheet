@@ -9,6 +9,7 @@
  */
 
 import type * as sheet from "../sheet.js";
+import type * as table from "../table.js";
 
 import type {
   ApiFromModules,
@@ -26,6 +27,7 @@ import type {
  */
 declare const fullApi: ApiFromModules<{
   sheet: typeof sheet;
+  table: typeof table;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
 
