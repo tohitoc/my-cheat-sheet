@@ -7,8 +7,8 @@ export default function SheetList() {
 
   return (
     <div className="grid grid-cols-2 w-full max-w-3/4 mx-auto gap-x-20 gap-y-12 mb-15">
-      {sheetList.map((elem) => (
-        <Sheet key={elem._id}>{elem.name}</Sheet>
+      {sheetList.map((sheet) => (
+        <Sheet key={sheet._id} id={sheet._id}>{sheet.name}</Sheet>
       ))}
     </div>
   );

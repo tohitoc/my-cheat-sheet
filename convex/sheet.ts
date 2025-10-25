@@ -14,3 +14,22 @@ export const getSheetList = query({
     return sheetList;
   },
 });
+
+export const remove = mutation({
+  args: { id: v.id("sheet") },
+  handler: async (ctx, { id }) => {
+    await ctx.db.delete(id);
+  },
+});
+
+export const update = mutation({
+  args: {
+    id: v.id("sheet"),
+    name: v.string(),
+  },
+  handler: async (ctx, { id, name }) => {
+    const existing = await ctx.db.get(id);
+    if (!existing) return;
+    await ctx.db.patch(id, { name: name });
+  },
+});

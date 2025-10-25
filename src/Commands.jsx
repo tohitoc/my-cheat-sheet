@@ -17,6 +17,7 @@ export default function Commands() {
     await addRow({ command: command, description: description });
     setCommand("");
     setDescription("");
+    setOpen(false);
   }
 
   return (
@@ -50,6 +51,7 @@ export default function Commands() {
               type="text"
               value={command}
               onChange={(e) => setCommand(e.target.value)}
+              autoFocus
             />
             <label className="font-inter text-xl font-normal block mb-2">Description</label>
             <input className="border rounded-sm mb-9 w-full font-inter text-lg font-normal"

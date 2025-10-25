@@ -14,6 +14,7 @@ export default function Sheets() {
     e.preventDefault();
     await addSheet({ name: name });
     setName("");
+    setOpen(false);
   }
   
   return (
@@ -35,6 +36,7 @@ export default function Sheets() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              autoFocus
             />
             <div className="flex justify-between w-full">
               <button onClick={() => setOpen(false)} type="button" className="cursor-pointer hover:bg-gray-300 w-[162px] h-[44px] bg-e8e8e8 font-inter font-normal text-xl">
