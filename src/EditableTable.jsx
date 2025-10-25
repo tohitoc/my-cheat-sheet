@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../convex/_generated/api";
 
-export default function EditableTable() {
-  const data = useQuery(api.commands.getAll);
+export default function EditableTable({ inputText }) {
+  const data = useQuery(api.commands.search, { inputText: inputText }) || [];
   const updateCommand = useMutation(api.commands.update);
   const removeCommand = useMutation(api.commands.remove);
 
@@ -32,10 +32,6 @@ export default function EditableTable() {
   const handleBlur = () => {
     setEditing({ id: null, field: null });
   };
-
-  if (data === undefined) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="max-w-3/5 mx-auto">

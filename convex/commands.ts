@@ -1,5 +1,5 @@
 import { query, mutation } from "./_generated/server";
-import { convexToJson, v } from "convex/values";
+import { v } from "convex/values";
 
 export const addRow = mutation({
   args: {
@@ -38,5 +38,16 @@ export const remove = mutation({
   args: { id: v.id("commands") },
   handler: async (ctx, args) => {
     await ctx.db.delete(args.id);
+  },
+});
+
+export const search = query({
+  args: { inputText: v.string() },
+  handler: async (ctx,{ inputText }) => {
+    if (inputText.length === 0) return await ctx.db.query("commands").collect();
+    return await ctx.db
+      .query("commands")
+      .withSearchIndex("search_cmd", (q) => q.search("command", inputText))
+      .collect()
   },
 });

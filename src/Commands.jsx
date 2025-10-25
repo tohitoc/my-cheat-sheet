@@ -10,6 +10,7 @@ export default function Commands() {
   const [command, setCommand] = useState("");
   const [description, setDescription] = useState("");
   const addRow = useMutation(api.commands.addRow);
+  const [query, setQuery] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -35,10 +36,12 @@ export default function Commands() {
         <input
           type="text"
           placeholder="Search..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           className="pl-12 rounded-4xl w-full min-h-10 border "
         />
       </div>
-      <EditableTable />
+      <EditableTable inputText={query} />
       {open && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
           <form onSubmit={handleSubmit} className="bg-white py-5 px-6 w-[384px] min-h-[176px] rounded-sm">
