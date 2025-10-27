@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../convex/_generated/api";
 
-export default function EditableTable({ inputText }) {
-  const data = useQuery(api.commands.search, { inputText: inputText }) || [];
+export default function EditableTable({ inputText, sheetName }) {
+  const data = useQuery(api.commands.search, { inputText: inputText, sheetName: sheetName }) || [];
   const updateCommand = useMutation(api.commands.update);
   const removeCommand = useMutation(api.commands.remove);
 
@@ -35,7 +35,7 @@ export default function EditableTable({ inputText }) {
 
   return (
     <div className="max-w-3/5 mx-auto">
-      <table className="w-full border border-collapse border-gray-300">
+      <table className="w-full border border-collapse border-gray-300 mb-15">
         <thead className="bg-e8e8e8">
           <tr className="font-inter text-xl h-10 text-left">
             <th className="border border-gray-300 w-2/5 font-medium pl-5">Command</th>

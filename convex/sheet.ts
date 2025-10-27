@@ -21,15 +21,3 @@ export const remove = mutation({
     await ctx.db.delete(id);
   },
 });
-
-export const update = mutation({
-  args: {
-    id: v.id("sheet"),
-    name: v.string(),
-  },
-  handler: async (ctx, { id, name }) => {
-    const existing = await ctx.db.get(id);
-    if (!existing) return;
-    await ctx.db.patch(id, { name: name });
-  },
-});

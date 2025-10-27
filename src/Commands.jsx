@@ -4,17 +4,21 @@ import EditableTable from "./EditableTable";
 import { useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../convex/_generated/api";
+import { useParams } from "react-router";
 
 export default function Commands() {
   const [open, setOpen] = useState(false);
   const [command, setCommand] = useState("");
   const [description, setDescription] = useState("");
-  const addRow = useMutation(api.commands.addRow);
   const [query, setQuery] = useState("");
+
+  const { sheetName } = useParams();
+
+  const addRow = useMutation(api.commands.addRow);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await addRow({ command: command, description: description });
+    await addRow({ command: command, description: description, sheetName: sheetName });
     setCommand("");
     setDescription("");
     setOpen(false);
@@ -24,7 +28,7 @@ export default function Commands() {
     <>
       <Header />
       <div className="flex justify-between items-center w-full max-w-4/5 mx-auto mb-15">
-        <h1 className="font-inter font-black text-5xl">Windows</h1>
+        <h1 className="font-inter font-black text-5xl">{sheetName}</h1>
         <button onClick={() => setOpen(true)} type="button" className="cursor-pointer flex gap-3 px-2 py-1 rounded-lg justify-between items-center bg-e8e8e8 hover:bg-gray-300">
           <Plus size={24} />
           <span className="font-inter text-2xl font-medium">Add Row</span>
@@ -42,7 +46,7 @@ export default function Commands() {
           className="pl-12 rounded-4xl w-full min-h-10 border "
         />
       </div>
-      <EditableTable inputText={query} />
+      <EditableTable inputText={query} sheetName={sheetName} />
       {open && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
           <form onSubmit={handleSubmit} className="bg-white py-5 px-6 w-[384px] min-h-[176px] rounded-sm">

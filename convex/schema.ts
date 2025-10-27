@@ -5,9 +5,13 @@ export default defineSchema({
   commands: defineTable({
     command: v.string(),
     description: v.string(),
-  }).searchIndex("search_cmd", {
-    searchField: "command",
-  }),
+    sheetName: v.string(),
+  })
+    .index("by_sheetName", ["sheetName"])
+    .searchIndex("search_cmd", {
+      searchField: "command",
+      filterFields: ["sheetName"],
+    }),
   sheet: defineTable({
     name: v.string(),
   }),

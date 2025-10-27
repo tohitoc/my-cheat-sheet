@@ -5,18 +5,14 @@ export const addRow = mutation({
   args: {
     command: v.string(),
     description: v.string(),
+    sheetName: v.string(),
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("commands", {
       command: args.command,
       description: args.description,
+      sheetName: args.sheetName,
     });
-  },
-});
-
-export const getAll = query({
-  handler: async (ctx) => {
-    return await ctx.db.query("commands").collect();
   },
 });
 
@@ -42,12 +38,20 @@ export const remove = mutation({
 });
 
 export const search = query({
-  args: { inputText: v.string() },
-  handler: async (ctx,{ inputText }) => {
-    if (inputText.length === 0) return await ctx.db.query("commands").collect();
+  args: { inputText: v.string(), sheetName: v.string() },
+  handler: async (ctx,{ inputText, sheetName }) => {
+    if (inputText.length === 0) {
+      const allCommands = await ctx.db
+        .query("commands")
+        .withIndex("by_sheetName", (q) => q.eq("sheetName", sheetName))
+        .collect();
+      return allCommands;
+    }
     return await ctx.db
       .query("commands")
-      .withSearchIndex("search_cmd", (q) => q.search("command", inputText))
-      .collect()
+      .withSearchIndex("search_cmd", (q) => 
+        q.search("command", inputText).eq("sheetName", sheetName),
+      )
+      .collect();
   },
 });

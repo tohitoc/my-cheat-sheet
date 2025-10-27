@@ -9,6 +9,7 @@
  */
 
 import type * as commands from "../commands.js";
+import type * as deleteDocumentsBySheetName from "../deleteDocumentsBySheetName.js";
 import type * as sheet from "../sheet.js";
 
 import type {
@@ -27,6 +28,7 @@ import type {
  */
 declare const fullApi: ApiFromModules<{
   commands: typeof commands;
+  deleteDocumentsBySheetName: typeof deleteDocumentsBySheetName;
   sheet: typeof sheet;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
