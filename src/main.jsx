@@ -11,7 +11,12 @@ const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
+    <ClerkProvider
+      publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
+      signInForceRedirectUrl="/"
+      signUpForceRedirectUrl="/"
+      afterSignOutUrl="/login"
+    >
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <BrowserRouter>
           <App />
