@@ -8,10 +8,15 @@ export const addRow = mutation({
     sheetName: v.string(),
   },
   handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Unauthenticated")
+    }
     await ctx.db.insert("commands", {
       command: args.command,
       description: args.description,
       sheetName: args.sheetName,
+      tokenIdentifier: identity.tokenIdentifier,
     });
   },
 });
@@ -40,17 +45,23 @@ export const remove = mutation({
 export const search = query({
   args: { inputText: v.string(), sheetName: v.string() },
   handler: async (ctx,{ inputText, sheetName }) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Unauthenticated")
+    }
     if (inputText.length === 0) {
       const allCommands = await ctx.db
         .query("commands")
-        .withIndex("by_sheetName", (q) => q.eq("sheetName", sheetName))
+        .withIndex("by_sheetName_token", (q) => 
+          q.eq("sheetName", sheetName).eq("tokenIdentifier", identity.tokenIdentifier),
+        )
         .collect();
       return allCommands;
     }
     return await ctx.db
       .query("commands")
       .withSearchIndex("search_cmd", (q) => 
-        q.search("command", inputText).eq("sheetName", sheetName),
+        q.search("command", inputText).eq("sheetName", sheetName).eq("tokenIdentifier", identity.tokenIdentifier),
       )
       .collect();
   },

@@ -4,13 +4,24 @@ import { v } from "convex/values";
 export const addSheet = mutation({
   args: { name: v.string() },
   handler: async (ctx, args) => {
-    await ctx.db.insert("sheet", { name: args.name });
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Unauthenticated")
+    }
+    await ctx.db.insert("sheet", { name: args.name, tokenIdentifier: identity.tokenIdentifier });
   },
 });
 
 export const getSheetList = query({
   handler: async (ctx) => {
-    const sheetList = await ctx.db.query("sheet").collect();
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Unauthenticated")
+    }
+    const sheetList = await ctx.db
+      .query("sheet")
+      .withIndex("by_token", (q) => q.eq("tokenIdentifier", identity.tokenIdentifier))
+      .collect();
     return sheetList;
   },
 });
