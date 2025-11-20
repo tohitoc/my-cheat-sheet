@@ -5,6 +5,7 @@ import Logo from "./assets/Logo.svg"
 export default function Login() {
   return (
     <>
+      <title>Login</title>
       <Header />
       <img src={Logo} alt="Logo" className="my-30 mx-auto"/>
       <div className="flex flex-col gap-7 mx-auto w-full max-w-2/5 font-inter font-normal text-2xl ">

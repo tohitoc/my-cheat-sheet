@@ -19,7 +19,6 @@ export default function Sheets() {
   
   return (
     <>
-      <title>Sheets</title>
       <Header />
       <div className="flex justify-between items-center w-full max-w-4/5 mx-auto mb-15">
         <h1 className="font-inter font-black text-5xl">Sheets</h1>
