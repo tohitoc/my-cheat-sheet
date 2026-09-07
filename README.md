@@ -1,6 +1,3 @@
-## Product URL
-`https://www.mccs.xyz/`
-
 ## Features
 - ユーザーごとに個別にシートを作成でき、各シートはCommand, Descriptionという2つの列をもつテーブル形式となっています。
 - Command列のデータに対して全文検索を行うことができます。
